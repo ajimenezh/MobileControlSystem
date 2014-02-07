@@ -1,0 +1,3 @@
+This is a tool to manage the security of your web by showing to each person when there's someone accessing their account, being able to accept that access (probably when the person is the one accesing his account), or forbid that acces (if he/she is not the one who has log in). Also, it has the possibility of managing remotely the account from his/her mobile phone and closing the account (for example, he/she forgot to close the session in a public computer, he/she can do it remotely from his/her mobile)
+
+This is only a project presented for a hackathon, so it's only a prototype, and it isn't in any way a finished product. 
