@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="bootstrap-3.0.0/assets/js/html5shiv.js"></script>
+      <script src="bootstrap-3.0.0/assets/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div id="list">
+    </div>
+    <div id="user" value="<%=user%>"></div>
+    <script>
+        var el = document.getElementById("user");
+        user = el.getAttribute("value");
+        var socket = io.connect();
+        socket.on('logon' + user, function () {
+            $('#list').prepend('Se ha conectado alguien');
+            var foo = document.getElementById("list");
+            var element = document.createElement("input");
+            element.setAttribute("type", "button");
+            element.setAttribute("value", "Iniciar sesion");
+            element.setAttribute("onClick", "accept1();");
+            foo.appendChild(element);
+        });
+        function accept1() {
+            var foo = document.getElementById("list");
+
+            while (foo.hasChildNodes()) {
+              foo.removeChild(foo.lastChild);
+            }
+
+            var element = document.createElement("input");
+            element.setAttribute("type", "button");
+            element.setAttribute("value", "Cerrar sesion");
+            element.setAttribute("onClick", "close1();");
+            foo.appendChild(element);
+
+            socket.emit('accept_connection', {
+                user: user
+            });
+        };
+        function close1() {
+            var foo = document.getElementById("list");
+
+            while (foo.hasChildNodes()) {
+              foo.removeChild(foo.lastChild);
+            }
+
+            socket.emit('close_session', {
+                user: user
+            });
+        };
+    </script>
+</body>
+</html>

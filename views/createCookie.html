@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="bootstrap-3.0.0/assets/js/html5shiv.js"></script>
+      <script src="bootstrap-3.0.0/assets/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div id="password" value="<%=password%>"></div>
+    Espere un momento mientras se guarda la configuracion...
+    <script>
+        var element = document.getElementById("password");
+        var hash = element.getAttribute("value");
+    
+        // Build the expiration date string:
+        var expiration_date = new Date();
+        var cookie_string = '';
+        expiration_date.setFullYear(expiration_date.getFullYear() + 1);
+        // Build the set-cookie string:
+        cookie_string = "hash=" + hash + "; path=/; expires=" + expiration_date.toGMTString();
+        // Create/update the cookie:
+        document.cookie = cookie_string;
+        window.location.replace("http://192.168.1.34:5000/mobile");
+    </script>
+</body>
+</html>

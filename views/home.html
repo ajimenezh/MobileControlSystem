@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="bootstrap-3.0.0/assets/js/html5shiv.js"></script>
+      <script src="bootstrap-3.0.0/assets/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div id="waiting">
+        <% if (state=="waiting") { %>
+            Esperando...
+        <% } else { %>
+            Lo siento la sesion se ha cerrado.
+        <% } %>
+    </div>
+    <div id="all">
+    </div>
+    <div id="user" value="<%=user%>"></div>
+    <script>
+        var el = document.getElementById("user");
+        user = el.getAttribute("value");
+        var socket = io.connect();
+        socket.on('connection_accepted' + user, function () {
+            $("#waiting").remove();
+            $("#all").append("Bien, ya estas dentro!!!");
+        });
+        socket.on('connection_closed' + user, function () {
+            $("#all").remove();
+            alert("La sesion se ha cerrado");
+
+            var form = document.createElement("form");
+            form.setAttribute("method", "post");
+            document.body.appendChild(form);
+            form.submit();
+        });
+    </script>
+</body>
+</html>

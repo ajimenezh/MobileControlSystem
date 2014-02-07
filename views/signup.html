@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="bootstrap-3.0.0/assets/js/html5shiv.js"></script>
+      <script src="bootstrap-3.0.0/assets/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div class="row">
+        <div class="header-text">
+            <h1>Sign up</h>
+        </div>
+    </div>
+    <div id="Login">
+        <form id="login" method="post">
+            <div>
+                <label>
+                    Usuario
+                </label>
+                <input type="text" name="user[name]" />
+            </div>
+            <div>
+                <label for="password">
+                    Contraseña
+                </label>
+                <input id="password" type="password" required="" name="user[password]" placeholder="" data-invalid=""></input>
+            </div>
+            <div>
+                <button class="btn">Enviar</button>
+            </div>
+        </form>
+    </div>
+
+    <a href="/signup">Registrarse</a>
+
+    <script>
+        var socket = io.connect();
+    </script>
+</body>
+</html>
